@@ -22,7 +22,7 @@ function global:pjnew {
     code .
 }
 
-function global:pjupload {
+function global:GitUploadThisProject {
     $ParrentDir = Get-Location
     $ThisFolderName = Get-Location | Select-Object | ForEach-Object{$_.ProviderPath.Split("\")[-1]}
     Write-Output "$ParrentDir and $ThisFolderName"
