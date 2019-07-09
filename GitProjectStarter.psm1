@@ -22,7 +22,7 @@ function global:pjnew {
     code .
 }
 
-function global:pjnewLocal {
+function global:pjLoc {
 
     # Variables
     $ProjectName = $args[0]
