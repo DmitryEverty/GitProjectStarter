@@ -1,4 +1,4 @@
-function global:pjnew {
+function global:newGitProject {
 
     # Variables
     $ProjectName = $args[0]
@@ -22,7 +22,7 @@ function global:pjnew {
     code .
 }
 
-function global:pjLoc {
+function global:newLocalProject {
 
     # Variables
     $ProjectName = $args[0]
@@ -43,7 +43,7 @@ function global:pjLoc {
     code .
 }
 
-function global:GitUploadThisProject {
+function global:UploadToGit {
     $ParrentDir = Get-Location
     $ThisFolderName = Get-Location | Select-Object | ForEach-Object{$_.ProviderPath.Split("\")[-1]}
     Write-Output "$ParrentDir and $ThisFolderName"
