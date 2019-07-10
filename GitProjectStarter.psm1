@@ -1,3 +1,5 @@
+Set-Alias -Name nlp -Value newLocalProject
+
 function global:newGitProject {
 
     # Variables
