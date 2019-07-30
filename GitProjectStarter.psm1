@@ -29,13 +29,33 @@ function global:newLocalProject {
     # Variables
     $ProjectName = $args[0]
     $ParrentDir = Get-Location
+
+    $message  = 'You have not specified a folder name. Initialize this folder?'
+    $question = 'Press "Y" or "Enter" if you are sure'
+    $choices  = '&Yes', '&No'
+
+    #If project name var is empty...
     if (!$ProjectName){
-        $ProjectName = Get-Location | Select-Object | ForEach-Object{$_.ProviderPath.Split("\")[-1]}
-        $PathToNewProject = -join ($ParrentDir,"\")
+        $decision = $Host.UI.PromptForChoice($message, $question, $choices, 0)
+        if ($decision -eq 0) {
+            $ProjectName = Get-Location | Select-Object | ForEach-Object{$_.ProviderPath.Split("\")[-1]}
+            $PathToNewProject = -join ($ParrentDir,"\")
+        }else{
+            Write-Host 'Enter a Project Name... '
+
+            while (!$ProjectName){
+                $ProjectName = Read-Host -Prompt 'Enter a Project Name without spaces... '
+            }
+            
+            $PathToNewProject = -join ($ParrentDir,"\", $ProjectName)
+            New-Item -ItemType Directory $PathToNewProject # Creating new folder inside
+
+        }
     }else{
     $PathToNewProject = -join ($ParrentDir,"\", $ProjectName)
     New-Item -ItemType Directory $PathToNewProject # Creating new folder inside
     }
+
     # Text Output For Debuging
     Write-Output "Your Project is called: $ProjectName in a folder $PathToNewProject"
 
